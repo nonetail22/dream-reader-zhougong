@@ -1,0 +1,35 @@
+{
+    "name": "Dream Reader",
+    "short_name": "Dream Reader",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#F7F7FB",
+    "theme_color": "#4A4E9B",
+    "description": "梦境记录与精神分析解析。录音即记，解析标注理论依据与置信度。",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

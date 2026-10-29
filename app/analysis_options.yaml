@@ -1,0 +1,18 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    # 让 CI / 本地 analyze 对未使用变量保持警告级，避免阻断构建
+    unused_local_variable: warning
+    unused_import: warning
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+
+linter:
+  rules:
+    # 项目风格约定
+    prefer_single_quotes: true
+    avoid_print: false # CLI 工具与调试期允许 print

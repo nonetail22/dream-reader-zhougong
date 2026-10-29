@@ -1,0 +1,74 @@
+name: dream_reader
+description: "Dream Reader · 周公解梦版 — 梦境记录 + 古传周公解梦 AI 解析（与社区版并存安装，BYOK）"
+publish_to: "none"
+# 版本与社区版基线一致（0.7.5+40）；包名不同，versionCode 无冲突。
+version: 0.7.5+40
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # 内置 widget 文案本地化（对话框按钮、日期选择等），SDK 自带、无需联网拉取
+  flutter_localizations:
+    sdk: flutter
+
+  # 本地存储：设置项（API Key 走独立安全存储通道）
+  shared_preferences: ^2.3.0
+
+  # 读取应用版本号（0.7.5 起「设置 → 关于」显示）
+  package_info_plus: ^10.2.2
+
+  # 端侧录音（点一下开始 / 再点一下结束）
+  # 注意：不要降回 5.x。record 5.2.1 锁 record_linux '>=0.5.0 <1.0.0'（→0.7.2），
+  # 而 record_platform_interface 会被解析到 1.6.0，后者新增了抽象成员
+  # startStream / hasPermission(request:)，导致 record_linux 0.7.2 编译失败
+  # （Android 目标下 dart:io 分支会把 record_linux 的 Dart 代码一起编进来）。
+  record: ^7.1.1
+
+  # 端侧转写（iOS Speech / Android SpeechRecognizer / Web Speech）
+  speech_to_text: ^7.0.0
+
+  # 本机文件路径（每条梦境一个 JSON 文件，不上云）
+  path_provider: ^2.1.0
+
+  # OpenAI 兼容 API 调用（BYOK）
+  http: ^1.2.0
+  # multipart 上传要显式给音频 MIME 类型：不少服务商靠它决定怎么解码，
+  # 给成 application/octet-stream 会得到含糊的 "unsupported format"。
+  # http 本身就依赖它，这里只是把"我们直接用它"这件事写明。
+  http_parser: ^4.0.0
+
+  # 离线识别模型按需下载后的完整性校验（sha256）。只在移动端 VM 里跑，
+  # 没有 dart2js 位运算口径问题（与 services/fingerprint.dart 的自写哈希不冲突）。
+  crypto: ^3.0.3
+  flutter_secure_storage: ^11.2.0
+
+  # 端侧离线识别（native，音频不出设备）。1.13.8 起 native 库随包分发，
+  # 构建时不需要联网拉 .so —— 这一点在受限网络下很重要。
+  sherpa_onnx: ^1.13.8
+  audioplayers: ^6.8.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  # 纯逻辑单元测试（json_repair / prompt_core）用 dart test 跑，
+  # 不依赖 flutter_tester，任何环境都能验证
+  test: ^1.25.0
+
+# 说明：不支持 3.29 之前的插件自动注册写法，保持默认即可
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/framework_prompt.md
+    #
+    # 0.6.0 起识别模型**不再预装**进安装包：模型从 78MB 小模型换成 243MB
+    # 大模型（长音频质量，见 audio_chunker.dart），预装会把 APK 顶破 300MB。
+    # 改为用户选择离线识别时弹窗确认、联网下载一次（services/offline_model.dart，
+    # hf-mirror 源 + 字节数/sha256 双重校验），之后全程离线。
+    # 历史注：曾把 78MB 模型直接打进包，理由是"凌晨醒来可能没网"；0.5.11 的
+    # 教训是——包小但模型弱，识别结果不可用同样等于不能用。取舍移交给用户：
+    # 装完不占体积，想要离线识别时自己选时机下载。
