@@ -2,7 +2,7 @@ name: dream_reader
 description: "Dream Reader · 周公解梦版 — 梦境记录 + 古传周公解梦 AI 解析（与社区版并存安装，BYOK）"
 publish_to: "none"
 # 版本与社区版基线一致（0.7.5+40）；包名不同，versionCode 无冲突。
-version: 0.7.5+40
+version: 0.7.6+41
 
 environment:
   sdk: ">=3.4.0 <4.0.0"
