@@ -1,6 +1,6 @@
 # Dream Reader · 周公解梦版
 
-**梦境记录 + 古传周公解梦 AI 解析 · 吉凶不定命，多解必并陈**
+**梦境记录 + 古传周公解梦 AI 解析 · 吉凶不定命，古断直引**
 
 <p align="center">
 <b><a href="#简体中文">简体中文</a></b> ·
@@ -24,7 +24,7 @@
 | # | 典籍体系 | 用途 |
 |---|---|---|
 | Z1 | 《周公解梦》（民间流传本） | 单梦取义主框架（按象分类的传统释义条目） |
-| Z2 | 《梦林玄解》（明代类书） | 意象取义 + 多解并陈主框架（直解与反解并存） |
+| Z2 | 《梦林玄解》（明代类书） | 意象取义 + 分歧并陈参考（直解与反解并存） |
 | Z3 | 《敦煌本梦书》等古传梦书残卷 | 旁证补充（须标注"残卷"） |
 | Z4 | 传统五行时辰语境 | 仅限 C 级（权且一说）补充视角 |
 
@@ -35,10 +35,11 @@
 
 传统解梦容易滑向的坑，本版用硬规则钉住：
 
-- **吉凶不定命**：禁止「此梦必应」「今年必发」式定命断言与占卜承诺；吉凶表述一律以
-  "《周公解梦》认为…"归属方式呈现，不做预知宣称。
-- **多解并陈**：古传梦书同象多义（正解、反解、因人因事而异）。禁止只取一条吉凶释义
-  当定论——每个梦象至少给出两种典籍释义并说明取舍理由。
+- **吉凶不定命**：禁止「此梦必应」「今年必发」式定命断言与占卜承诺；吉凶表述一律
+  归属典籍（如「古断：屎尿污身主得财」），不做预知宣称。
+- **断语直给，有分歧才并陈**：典籍诸本一致的梦象直接按一致断语取义，并**逐字引用
+  条目原文**（如「屎尿污身主得财」「厕中屎溢，大吉利」）；典籍间确有分歧（如直解
+  与反解）时并列两说并说明取舍理由，不为凑「多解」硬造分歧。
 - **睡瘫不是凶兆**：「鬼压床」、跑不动喊不出等是已知睡眠生理现象（快速眼动期肌张力
   抑制），明确禁止按凶兆/灵异条目解读，防止制造恐惧。
 - 清单外体系（塔罗、星座、灵异学说）一律禁止引用。
@@ -85,10 +86,11 @@ flutter test      # 全量测试（含周公版解析框架契约测试）
 
 ### 解析引擎
 
-单一真源：[`app/assets/framework_prompt.md`](app/assets/framework_prompt.md)（vZ1.0，
+单一真源：[`app/assets/framework_prompt.md`](app/assets/framework_prompt.md)（vZ1.1，
 自社区版框架 v1.1.2 派生）。配套契约测试
 [`app/test/prompt_builder_test.dart`](app/test/prompt_builder_test.dart)
-在继承社区版全部护栏钉点的基础上，另钉本版流派护栏（吉凶不定命、多解并陈、睡瘫禁按凶兆解）。
+在继承社区版全部护栏钉点的基础上，另钉本版流派护栏（吉凶不定命、断语直引、
+有分歧才并陈、睡瘫禁按凶兆解）。
 
 ### 与社区版的差异一览
 
@@ -124,7 +126,7 @@ flutter test      # 全量测试（含周公版解析框架契约测试）
 
 ## English
 
-**Dream journaling + classical Zhou Gong AI interpretation — no fatalistic verdicts, multiple traditional readings always presented**
+**Dream journaling + classical Zhou Gong AI interpretation — no fatalistic verdicts, classical verdicts quoted verbatim**
 
 ### About
 
@@ -150,12 +152,13 @@ Every conclusion cites its **classical source** (e.g. `Z1-wealth`) and a confide
 ### School-specific guards
 
 - **No fatalism**: verdicts like "this dream will surely come true" and divination promises
-  are hard-banned; traditional readings are always attributed ("*Zhou Gong Jie Meng*
-  considers…"), never asserted as predictions.
-- **Multiple readings always**: classical dream books give several meanings for the same
-  image (direct, inverted, person-dependent). Picking a single auspicious verdict as *the*
-  answer is a spec violation — at least two readings plus the reason for the choice are
-  required.
+  are hard-banned; traditional readings are always attributed to the classical sources
+  (e.g. "classical verdict: filth on the body presages wealth"), never asserted as predictions.
+- **Verdicts quoted directly; alternatives only when sources disagree**: when classical
+  dream books agree on an image, the reading follows the unanimous verdict with the
+  original entry quoted verbatim (e.g. "filth on the body presages wealth"). When sources
+  genuinely diverge (direct vs. inverted readings), both are presented with the reason for
+  the choice — fabricating a second reading just to look "balanced" is a spec violation.
 - **Sleep paralysis is not an omen**: "ghost pressing on the chest", inability to move or
   speak are known REM-related physiological phenomena. Interpreting them through
   ominous/supernatural entries is explicitly banned.
@@ -211,7 +214,7 @@ flutter test      # full test suite, incl. Zhou Gong edition contract tests
 ### The interpretation engine
 
 Single source of truth:
-[`app/assets/framework_prompt.md`](app/assets/framework_prompt.md) (vZ1.0, derived from the
+[`app/assets/framework_prompt.md`](app/assets/framework_prompt.md) (vZ1.1, derived from the
 community edition's framework v1.1.2). Contract tests in
 [`app/test/prompt_builder_test.dart`](app/test/prompt_builder_test.dart) inherit every
 community-edition guard and additionally pin this edition's school guards (no fatalism,

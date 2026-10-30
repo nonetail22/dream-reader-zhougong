@@ -137,9 +137,11 @@ void main() {
       expect(analysis, lessThan(questions));
     });
 
-    test('禁止术语进 point、禁止把"无法判定"当结论（两条硬护栏）', () {
+    test('禁止行话进 point、禁止把"无法判定"当结论（两条硬护栏；vZ1.1 起传统断语词不算行话）', () {
       final sys = builder.systemPromptBody;
-      expect(sys, contains('禁止出现任何专业术语'));
+      expect(sys, contains('行话与编号'));
+      // vZ1.1：断语直给——传统断语词（得财/大吉等）不算行话，鼓励使用
+      expect(sys, contains('鼓励使用'));
       expect(sys, contains('禁止把"无法判定"'));
     });
 
