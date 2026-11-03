@@ -2,6 +2,8 @@
 
 **梦境记录 + 古传周公解梦 AI 解析 · 吉凶不定命，古断直引**
 
+**⬇️ 下载安装包（Android APK）：[前往 Releases 下载](https://github.com/nonetail22/dream-reader-zhougong/releases/latest)**
+
 <p align="center">
 <b><a href="#简体中文">简体中文</a></b> ·
 <b><a href="#english">English</a></b>
