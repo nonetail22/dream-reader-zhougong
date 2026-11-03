@@ -65,7 +65,7 @@
 ### 下载
 
 从 [Releases](https://github.com/nonetail22/dream-reader-zhougong/releases) 下载 APK
-（arm64-v8a）。当前版本 **0.7.5**（基线），包名
+（arm64-v8a）。当前版本 **0.7.6**（解析引擎 vZ1.1「断语直给」传统味修订），包名
 `com.dreamreader.dream_reader_zhougong`，应用名「周公解梦」——
 与社区版（`com.dreamreader.dream_reader`）**可在同一部手机上并存安装**。
 
@@ -192,7 +192,8 @@ telemetry, no account.
 
 Grab the APK (arm64-v8a) from the
 [Releases](https://github.com/nonetail22/dream-reader-zhougong/releases) page.
-Current baseline version: **0.7.5**. Package name
+Current version: **0.7.6** (interpretation engine vZ1.1, the classical-flavor revision).
+Package name
 `com.dreamreader.dream_reader_zhougong`, app name 「周公解梦」 — it **installs side by
 side** with the community edition (`com.dreamreader.dream_reader`).
 
@@ -220,7 +221,8 @@ Single source of truth:
 community edition's framework v1.1.2). Contract tests in
 [`app/test/prompt_builder_test.dart`](app/test/prompt_builder_test.dart) inherit every
 community-edition guard and additionally pin this edition's school guards (no fatalism,
-multiple readings, sleep paralysis not an omen).
+verdicts quoted directly with alternatives only when sources disagree, sleep paralysis
+not an omen).
 
 ### Differences from the community edition
 
